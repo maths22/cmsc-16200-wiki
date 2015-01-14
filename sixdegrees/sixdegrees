@@ -1,0 +1,64 @@
+#! /usr/bin/php
+<?php
+
+function getLinks($req_id){
+	global $conn;
+	$getlinks = $conn->prepare("SELECT page.page_id FROM `pagelinks`
+	INNER JOIN `page` ON page.page_title = pagelinks.pl_title AND page.page_namespace=0
+	WHERE pagelinks.pl_from_namespace=0 AND pagelinks.pl_namespace=0 AND pagelinks.pl_from IN (".implode(",",$req_id).") ;");
+
+	$ret = $getlinks->execute();
+	return $getlinks->fetchAll(PDO::FETCH_COLUMN|PDO::FETCH_UNIQUE,0);
+}
+
+function compareLinks($links,$comp){
+	if(empty($links)){
+		return null;
+	}
+	foreach($links as $link){
+		if($link==$comp){
+			return $link;
+		}
+	}
+	return null;
+}
+
+function recursiveMatch ($id_list, $final_id, $steps = 1){
+	$ret = 0;
+	while($ret == 0){
+		if(count($id_list) == 0){
+			exit -1;
+		}
+		$id_list = getLinks($id_list);
+		$ret = compareLinks($id_list,$final_id);
+		if(isset($ret)){
+			$ret = $steps;
+			break;
+		} else {
+			$steps = $steps+1;
+		}		
+	}
+	
+	return $ret;
+}
+
+$conn = new PDO('mysql:host=localhost;dbname=simple-pages;charset=utf8', 'devel');
+
+$conn->query('SET profiling = 1;');
+
+$idlookup = $conn->prepare("select page_id from page where page_title LIKE :name;");
+$idlookup->bindParam(':name', $name);
+$name = str_replace(' ', '_', $argv[1]);
+$idlookup->execute();
+$base_list = $idlookup->fetchAll(PDO::FETCH_COLUMN|PDO::FETCH_UNIQUE,0);
+$idlookup->closeCursor();
+
+$name = $name = str_replace(' ', '_', $argv[2]);
+$idlookup->execute();
+$comp_id = $idlookup->fetch()['page_id'];
+$idlookup->closeCursor();
+
+echo recursiveMatch($base_list,$comp_id);
+
+?>
+
