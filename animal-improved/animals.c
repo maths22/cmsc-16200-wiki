@@ -10,6 +10,7 @@
 #include "animal.h"
 #include "prompt.h"
 
+#define DEBUG 0
 #include "debug.h"
 
 bool continue_run(){
@@ -26,19 +27,21 @@ void lose(animal_question currq, bool correct){
     add_animal(currq, correct);
 }
 
-int main(int argc, char** argv){
+int main(int argc, char** argv){    
     printf("%s\n\n",GREETING_STR);
     
     //read in input file name, if applicable
     animal_question root;
     char* in_fname = NULL;
-    
+    FILE* in = NULL;
     if(argc == 2) {
-         in_fname = strdup(argv[1]);   
+        in_fname = strdup(argv[1]);   
+        in = fopen(in_fname,"r");
     } else if(argc == 1) {
         bool load = ask_yn(USE_FILE_STR);
         if(load) {
             in_fname = prompt_input_inline(READ_FILE_STR);
+            in = fopen(in_fname,"r");
         }
         printf("\n");
     } else {
@@ -47,7 +50,7 @@ int main(int argc, char** argv){
     }
     
     //open and read in input file if applicable; otherwise, create default question set
-    FILE* in = fopen(in_fname,"r");
+    
     if(in != NULL){
             root = deserialize_animal(in);
             fclose(in);
@@ -75,7 +78,8 @@ int main(int argc, char** argv){
             } else {
                 lose(currq,ans);
             }
-            done = continue_run();
+            done = !continue_run();
+            debug_print("%i",done);
             currq = root;
         } else {
             //move down the tree
@@ -89,9 +93,10 @@ int main(int argc, char** argv){
     char* out_fname;
     if(save) {
         if(in_fname == NULL){
-            in_fname = "animals.sav";
+            in_fname = strdup("animals.sav");
         }
         out_fname = prompt_input_inline_default(in_fname,WRITE_FILE_STR,in_fname);
+        debug_print("%s",out_fname);
         char* ser = serialize_animal(root);
         FILE* out = fopen(out_fname,"w");
         if(out!=NULL){

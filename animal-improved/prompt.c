@@ -9,6 +9,7 @@
 
 #include "prompt.h"
 
+#define DEBUG 0
 #include "debug.h"
 
 static size_t lnsize = 0;
@@ -22,7 +23,7 @@ bool vask_yn(const char* q, va_list chars){
     strcat(format, " (y/n) ");
     vfprintf(stdout, format, chars);
     char* resp = NULL;
-    int linesize = readline_nonempty(&resp);
+    int linesize = readline(&resp);
     
     
     bool ret = -1;
@@ -58,7 +59,7 @@ char* vprompt_input(bool inlinep, const char* s, va_list chars){
     strcat(format, ps);
     vfprintf(stdout, format, chars);
     char* resp = NULL;
-    readline_nonempty(&resp);
+    readline(&resp);
     return resp;
 }
 
@@ -83,7 +84,7 @@ char* prompt_input_inline_default(const char* default_val, const char* s, ...){
     va_start(argptr, s);
     char* ret = vprompt_input(true, s, argptr);
     va_end(argptr);
-    if(ret[0] == '-')
+    if(ret[0] == '\0')
     {
         free(ret);
         return strdup(default_val);
@@ -100,12 +101,12 @@ char* prompt_input(bool inlinep, const char* s, ...){
 }
 
 //does NOT follow the pattern of getline
-//resp will point to a newly allocated buffer
+//ret will point to a newly allocated buffer
 //the terminal newline will not be included
-int readline_nonempty(char** ret){
+int readline(char** ret){
     char* resp = NULL;
     int linesize = 0;
-    while(resp == NULL || linesize <= 1){
+    while(resp == NULL){
         linesize = getline(&resp,&lnsize,stdin);
         if(linesize == -1){
             error_print("End of input reached.");

@@ -10,6 +10,7 @@
 #include "animal.h"
 #include "prompt.h"
 
+#define DEBUG 0
 #include "debug.h"
 
 animal_question create_animal_question(){

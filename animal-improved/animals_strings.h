@@ -4,7 +4,7 @@
 static const char* const USE_FILE_STR = "Do you want to load a previous run of the Animal Game?";
 static const char* const READ_FILE_STR = "What save file do you want to load?";
 static const char* const USE_FILE_OUT_STR = "Do you want to save this run of the Animal Game?";
-static const char* const WRITE_FILE_STR = "What file do you want to save to (type '-' to save to \"%s\")";
+static const char* const WRITE_FILE_STR = "What file do you want to save to (default: \"%s\")";
 static const char* const GREETING_STR = "Welcome to the Animal Game!";
 static const char* const PLAYAGAIN_STR = "Would you like to play again?";
 static const char* const WIN_STR = "I win.";

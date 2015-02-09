@@ -10,7 +10,7 @@ bool ask_yn(const char* q, ...);
 char* prompt_input_newline(const char* s, ...);
 //same as above prompt on the same line
 char* prompt_input_inline(const char* s, ...);
-//same as above, but if the user inputs '-', default_val will be returned
+//same as above, but if the user inputs '\n', default_val will be returned
 char* prompt_input_inline_default(const char* default_val, const char* s, ...);
 
 #endif
