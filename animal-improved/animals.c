@@ -42,7 +42,7 @@ int main(int argc, char** argv){
         }
         printf("\n");
     } else {
-        error_print("Invalid number of parameters.");
+        error_print("Invalid number of parameters");
         exit(-1);
     }
     
@@ -52,7 +52,7 @@ int main(int argc, char** argv){
             root = deserialize_animal(in);
             fclose(in);
             if(root == NULL){
-                error_print("Invalid input_file.");
+                error_print("Invalid input file");
                 exit(-1);
             }
     } else {
