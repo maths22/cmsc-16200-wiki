@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<courses>
+  <course name="CMSC-16200">
+    <section number="1" day="MWF" time="9:30 AM" units="2"/>
+    <section number="1" day="MWF" time="11:30 AM" units="2"/>
+  </course>
+  <course name="MATH-16200">
+    <section number="21" day="MWF" time="9:30 AM" units="2"/>
+    <section number="31" day="MWF" time="10:30 AM" units="2"/>
+    <section number="32" day="MWF" time="10:30 AM" units="2"/>
+    <section number="33" day="MWF" time="10:30 AM" units="2"/>
+    <section number="41" day="MWF" time="11:30 AM" units="2"/>
+    <section number="43" day="MWF" time="11:30 AM" units="2"/>
+    <section number="51" day="MWF" time="12:30 PM" units="2"/>
+  </course>
+  <course name="BIOS-10130">
+    <section number="7" day="MWF" time="8:30 AM" units="4"/>
+    <section number="8" day="MWF" time="10:30 AM" units="4"/>
+    <section number="9" day="MWF" time="12:30 AM" units="4"/>
+    <section number="10" day="MWF" time="2:30 PM" units="4"/>
+    <section number="11" day="TR" time="9:00 AM" units="6"/>
+    <section number="12" day="TR" time="1:30 PM" units="6"/>
+  </course>
+</courses>
