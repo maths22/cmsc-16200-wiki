@@ -130,7 +130,7 @@ for sch in schedules:
     if sch.has_n_courses(len(tree)):
         root.append(sch.scheduleXML())
         i += 1
-print(i)
+print("Generated "+i+" schedules")
 
 ET.ElementTree(root).write("out.xml")
 
