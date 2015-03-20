@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<element name='teams' xmlns="http://relaxng.org/ns/structure/1.0">
+    <zeroOrMore>
+        <element name="team">
+            <element name="number">
+                <text/>
+            </element>
+            <element name="name">
+                <text/>
+            </element>
+            <element name="location">
+                <text/>
+            </element>
+            <element name="members">
+                <zeroOrMore>
+                    <element name="person">
+                        <element name="name">
+                            <text/>
+                        </element>
+                        <element name="email">
+                            <text/>
+                        </element>
+                        <oneOrMore>
+                            <element name="role">
+                                <text/>
+                            </element>
+                        </oneOrMore>
+                        <optional>
+                            <element name="captain">
+                                <empty/>
+                            </element>
+                        </optional>
+                    </element>
+                </zeroOrMore>
+            </element>
+        </element>
+    </zeroOrMore>
+</element>

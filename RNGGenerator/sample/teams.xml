@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+Jacob Burroughs
+Exercise 20
+
+$ xmllint -noout -relaxng teams.rng teams.xml 
+teams.xml validates
+-->
+<teams>
+    <team>
+        <number>3785</number>
+        <name>The Beastie Bots</name>
+        <location>Highland Park, IL</location>
+        <members>
+            <person>
+                <name>Jacob Burroughs</name>
+                <email>jacob@beastiebots.org</email>
+                <role>Programmer</role>
+                <role>Builder</role>
+                <captain/>
+            </person>
+            <person>
+                <name>Shira Shartiag</name>
+                <email>shira@beastiebots.org</email>
+                <role>Builder</role>
+                <captain/>
+            </person>
+            <person>
+                <name>Rory Miller</name>
+                <email>rory@beastiebots.org</email>
+                <role>Builder</role>
+                <role>Programmer</role>
+            </person>
+            <person>
+                <name>Ben Rubin</name>
+                <email>ben@beastiebots.org</email>
+                <role>Community Outreach Leader</role>
+            </person>
+            <person>
+                <name>Sam Chase</name>
+                <email>sam@beastiebots.org</email>
+                <role>Builder</role>
+            </person>
+            <person>
+                <name>Justin Garfinkle</name>
+                <email>justin@beastiebots.org</email>
+                <role>Scribe</role>
+            </person>
+        </members>
+    </team>
+</teams>
